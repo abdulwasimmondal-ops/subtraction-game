@@ -1,30 +1,67 @@
-let num1, num2;
-let score = 0;
-
-function generateQuestion() {
-    num1 = Math.floor(Math.random() * 20) + 1;
-    num2 = Math.floor(Math.random() * num1);
-
-    document.getElementById("num1").innerText = num1;
-    document.getElementById("num2").innerText = num2;
-    document.getElementById("answer").value = "";
-    document.getElementById("message").innerText = "";
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #74ebd5, #9face6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-function checkAnswer() {
-    let userAnswer = Number(document.getElementById("answer").value);
-    let correctAnswer = num1 - num2;
-
-    if (userAnswer === correctAnswer) {
-        document.getElementById("message").innerText = "✅ Correct!";
-        score++;
-    } else {
-        document.getElementById("message").innerText =
-            "❌ Wrong! Answer was " + correctAnswer;
-    }
-
-    document.getElementById("score").innerText = score;
-    setTimeout(generateQuestion, 1000);
+.game-container {
+    background: #fff;
+    width: 95%;
+    max-width: 400px;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
 }
 
-generateQuestion();
+h1 {
+    margin: 10px 0;
+}
+
+select {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.game-area {
+    position: relative;
+    height: 200px;
+    border: 2px solid #333;
+    margin: 15px 0;
+    overflow: hidden;
+}
+
+#question {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#answer {
+    width: 100%;
+    font-size: 20px;
+    padding: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.keyboard button {
+    padding: 12px;
+    font-size: 18px;
+    background: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
