@@ -1,67 +1,75 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #74ebd5, #9face6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+let num1, num2, answer;
+let topPos = 0;
+let speed = 1;
+let score = 0;
+let fallInterval;
+
+function setLevel() {
+    let level = document.getElementById("level").value;
+    if (level === "beginner") speed = 1;
+    if (level === "pro") speed = 2;
+    if (level === "expert") speed = 3;
+    startGame();
 }
 
-.game-container {
-    background: #fff;
-    width: 95%;
-    max-width: 400px;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
+function startGame() {
+    score = 0;
+    document.getElementById("score").innerText = score;
+    generateQuestion();
 }
 
-h1 {
-    margin: 10px 0;
+function generateQuestion() {
+    clearInterval(fallInterval);
+    topPos = 0;
+
+    let max = speed === 1 ? 20 : speed === 2 ? 50 : 100;
+    num1 = Math.floor(Math.random() * max) + 1;
+    num2 = Math.floor(Math.random() * num1);
+    answer = num1 - num2;
+
+    let q = document.getElementById("question");
+    q.innerText = `${num1} − ${num2}`;
+    q.style.top = "0px";
+
+    fallInterval = setInterval(() => {
+        topPos += speed;
+        q.style.top = topPos + "px";
+
+        if (topPos > 160) {
+            gameOver();
+        }
+    }, 30);
 }
 
-select {
-    padding: 5px;
-    font-size: 16px;
+function pressKey(num) {
+    document.getElementById("answer").value += num;
 }
 
-.game-area {
-    position: relative;
-    height: 200px;
-    border: 2px solid #333;
-    margin: 15px 0;
-    overflow: hidden;
+function clearAnswer() {
+    document.getElementById("answer").value = "";
 }
 
-#question {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    font-size: 28px;
-    font-weight: bold;
+function checkAnswer() {
+    let user = Number(document.getElementById("answer").value);
+
+    if (user === answer) {
+        document.getElementById("correctSound").play();
+        score++;
+        document.getElementById("score").innerText = score;
+        document.getElementById("answer").value = "";
+        generateQuestion();
+    } else {
+        document.getElementById("wrongSound").play();
+        clearAnswer();
+    }
 }
 
-#answer {
-    width: 100%;
-    font-size: 20px;
-    padding: 5px;
-    margin-bottom: 10px;
-    text-align: center;
+function gameOver() {
+    clearInterval(fallInterval);
+    document.getElementById("gameOverSound").play();
+    alert("Game Over! Score: " + score);
+    startGame();
 }
 
-.keyboard {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-}
-
-.keyboard button {
-    padding: 12px;
-    font-size: 18px;
-    background: #6c63ff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
+setLevel();
 
