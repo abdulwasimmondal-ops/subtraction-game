@@ -2,26 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Subtraction Game</title>
+    <title>Falling Subtraction Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="game-container">
-        <h1>Subtraction Game</h1>
+<div class="game-container">
 
-        <div class="question">
-            <span id="num1">0</span> − <span id="num2">0</span> =
-        </div>
+    <h1>Subtraction Game</h1>
 
-        <input type="number" id="answer" placeholder="Your answer">
+    <select id="level" onchange="setLevel()">
+        <option value="beginner">Beginner</option>
+        <option value="pro">Pro</option>
+        <option value="expert">Expert</option>
+    </select>
 
-        <button onclick="checkAnswer()">Check</button>
-
-        <p id="message"></p>
-        <p>Score: <span id="score">0</span></p>
+    <div class="game-area">
+        <div id="question">0 − 0</div>
     </div>
 
-    <script src="script.js"></script>
+    <input type="text" id="answer" readonly>
+
+    <!-- Virtual Keyboard -->
+    <div class="keyboard">
+        <button onclick="pressKey(1)">1</button>
+        <button onclick="pressKey(2)">2</button>
+        <button onclick="pressKey(3)">3</button>
+        <button onclick="pressKey(4)">4</button>
+        <button onclick="pressKey(5)">5</button>
+        <button onclick="pressKey(6)">6</button>
+        <button onclick="pressKey(7)">7</button>
+        <button onclick="pressKey(8)">8</button>
+        <button onclick="pressKey(9)">9</button>
+        <button onclick="pressKey(0)">0</button>
+        <button onclick="clearAnswer()">C</button>
+        <button onclick="checkAnswer()">✔</button>
+    </div>
+
+    <p>Score: <span id="score">0</span></p>
+
+</div>
+
+<audio id="correctSound" src="sounds/correct.mp3"></audio>
+<audio id="wrongSound" src="sounds/wrong.mp3"></audio>
+<audio id="gameOverSound" src="sounds/gameover.mp3"></audio>
+
+<script src="script.js"></script>
 </body>
 </html>
+
