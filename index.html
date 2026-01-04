@@ -11,6 +11,8 @@
 <div class="game-container">
 
     <h1>Subtraction Game</h1>
+<input type="text" id="playerName" placeholder="Enter your name" />
+
 
     <select id="level" onchange="setLevel()">
         <option value="beginner">Beginner</option>
@@ -48,7 +50,12 @@
 <audio id="wrongSound" src="sounds/wrong.mp3"></audio>
 <audio id="gameOverSound" src="sounds/gameover.mp3"></audio>
 
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
 <script src="script.js"></script>
+<h3>🏆 Leaderboard</h3>
+<ul id="leaderboard"></ul>
+
 </body>
 </html>
-
