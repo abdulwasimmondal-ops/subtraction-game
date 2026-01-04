@@ -1,3 +1,13 @@
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDbEt8Ao254mBULrzxFesd5Mr0AjBrn5NI",
+  authDomain: "subtraction-game-leaderboard.firebaseapp.com",
+  projectId: "subtraction-game-leaderboard",
+  storageBucket: "subtraction-game-leaderboard.firebasestorage.app",
+  messagingSenderId: "54257847906",
+  appId: "1:54257847906:web:189567408a681b8dc5cb3b",
+  measurementId: "G-Q87LNW0625"
+};
 let num1, num2, answer;
 let topPos = 0;
 let speed = 1;
@@ -66,10 +76,37 @@ function checkAnswer() {
 
 function gameOver() {
     clearInterval(fallInterval);
-    document.getElementById("gameOverSound").play();
-    alert("Game Over! Score: " + score);
+
+    const name =
+        document.getElementById("playerName").value || "Anonymous";
+
+    db.collection("leaderboard").add({
+        name: name,
+        score: score,
+        time: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    alert("Game Over! Your score: " + score);
     startGame();
 }
 
 setLevel();
+db.collection("leaderboard")
+  .orderBy("score", "desc")
+  .limit(10)
+  .onSnapshot(snapshot => {
+
+    const list = document.getElementById("leaderboard");
+    list.innerHTML = "";
+
+    let rank = 1;
+
+    snapshot.forEach(doc => {
+        const data = doc.data();
+        const li = document.createElement("li");
+        li.innerText = `${rank}. ${data.name} — ${data.score}`;
+        list.appendChild(li);
+        rank++;
+    });
+});
 
