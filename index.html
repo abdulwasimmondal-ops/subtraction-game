@@ -4,29 +4,36 @@
     <meta charset="UTF-8">
     <title>Falling Subtraction Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
+
 <body>
 
 <div class="game-container">
 
     <h1>Subtraction Game</h1>
-<input type="text" id="playerName" placeholder="Enter your name" />
 
-
+    <!-- Difficulty -->
     <select id="level" onchange="setLevel()">
         <option value="beginner">Beginner</option>
         <option value="pro">Pro</option>
         <option value="expert">Expert</option>
     </select>
 
+    <!-- Game area -->
     <div class="game-area">
         <div id="question">0 − 0</div>
     </div>
 
+    <!-- Answer -->
     <input type="text" id="answer" readonly>
 
-    <!-- Virtual Keyboard -->
+    <!-- Keyboard -->
     <div class="keyboard">
         <button onclick="pressKey(1)">1</button>
         <button onclick="pressKey(2)">2</button>
@@ -44,18 +51,26 @@
 
     <p>Score: <span id="score">0</span></p>
 
+    <!-- Save score (hidden initially) -->
+    <div id="saveScoreSection" class="hidden">
+        <input type="text" id="playerName" placeholder="Enter your name">
+        <button onclick="saveScore()">Save Score</button>
+    </div>
+
+    <!-- Leaderboard -->
+    <div id="leaderboardSection" class="hidden">
+        <h3>🏆 Leaderboard</h3>
+        <ul id="leaderboard"></ul>
+        <button onclick="restartGame()">Play Again</button>
+    </div>
+
 </div>
 
+<!-- Sounds -->
 <audio id="correctSound" src="sounds/correct.mp3"></audio>
 <audio id="wrongSound" src="sounds/wrong.mp3"></audio>
 <audio id="gameOverSound" src="sounds/gameover.mp3"></audio>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
 <script src="script.js"></script>
-<h3>🏆 Leaderboard</h3>
-<ul id="leaderboard"></ul>
-
 </body>
 </html>
