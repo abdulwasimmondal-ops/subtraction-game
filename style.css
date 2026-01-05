@@ -1,66 +1,70 @@
 body {
     margin: 0;
+    padding: 10px;
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #74ebd5, #9face6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 .game-container {
     background: #fff;
-    width: 95%;
-    max-width: 400px;
+    max-width: 360px;
+    margin: auto;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 12px;
     text-align: center;
 }
 
 h1 {
-    margin: 10px 0;
+    margin-bottom: 10px;
 }
 
-select {
-    padding: 5px;
+select, input, button {
+    width: 100%;
+    margin: 6px 0;
+    padding: 8px;
     font-size: 16px;
 }
 
 .game-area {
     position: relative;
-    height: 200px;
+    height: 180px;
     border: 2px solid #333;
-    margin: 15px 0;
+    margin: 10px 0;
     overflow: hidden;
 }
 
 #question {
     position: absolute;
-    top: 0;
     width: 100%;
     font-size: 28px;
     font-weight: bold;
-}
-
-#answer {
-    width: 100%;
-    font-size: 20px;
-    padding: 5px;
-    margin-bottom: 10px;
-    text-align: center;
+    top: 0;
 }
 
 .keyboard {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
+    gap: 8px;
 }
 
 .keyboard button {
-    padding: 12px;
+    padding: 14px;
     font-size: 18px;
     background: #6c63ff;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+}
+
+.hidden {
+    display: none;
+}
+
+ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+li {
+    padding: 4px 0;
 }
